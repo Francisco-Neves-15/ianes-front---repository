@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset='utf-8'>
+    <!-- Forçar o navegador renderizar com o modo mais recente do navegador atual (instalado na máquina do usuário). -->
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <!-- Define a: Controle do Chache, nesse caso "private" então o cache é armazenado para um usuário específico -->
+    <meta http-equiv="cache-control" content="private" />
+    <!-- Define a: Linguagens do Conteudo -->
+    <meta http-equiv="content-language" content="pt-br, pt, en-US, fr" />
+    <title>Bem-vindo ao IAnes!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- Import do CSS Principal com Aplicações Gerais -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/main.css'>
+
+    <!-- Import do CSS Cabeçalho e Rodapé -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/head_foot.css'>
+
+    <!-- Import do CSS da Autenticação -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/_auth.css'>
+
+</head>
+<body id="corpoPagina">
+
+    <!-- Cabeçalho -->
+    <header id="header"></header>
+
+    <main>
+        <a href="pagina_ia.html">IR</a>
+    </main>
+    
+    <!-- Rodapé -->
+    <footer id="footer"></footer>
+    
+    <!-- A Ordem de Chamar os <script> IMPORTA! -->
+    <!-- Chamando o Idioma e o Tema -->
+    <script src="_js/_idioma.js"></script>
+    <script src="_js/_tema.js"></script>
+    <!-- Chamando apenas a do Cabeçalho e Rodapé -->
+    <script src="_js/head_foot.js"></script>
+    <!-- Chamando o Principal GERAL pagina -->
+    <script src="_js/main.js"></script> 
+    <!-- Chamando o Principal DESSA pagina -->
+    <script src="_js/__auth.js"></script>
+
+</body>
+</html>
