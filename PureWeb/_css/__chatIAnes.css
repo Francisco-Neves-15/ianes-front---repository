@@ -1,0 +1,558 @@
+/* Importando o Root. O Root é uma Arquivo de Cores que foram Pré-Configuradas */
+@import url(root.css);
+
+/* Codigo Principal */
+
+body {
+    margin: 0; /* Remove a margem padrão do body */
+    overflow: hidden; /* Remove o scroll */
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 0vw;
+    background-color: transparent;
+    position: relative;
+}
+
+.top_container {
+    width: 100%;
+    height: 80%;
+    background-color: transparent;
+    padding: 0vw;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    z-index: 600;
+    box-sizing: border-box;
+}
+
+.bottom_container {
+    width: 100%;
+    height: 20%;
+    background-color: blue;
+    padding: 0vw;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+    z-index: 601;
+    box-sizing: border-box;
+}
+
+/* ----- Container da Conversa */
+
+.chat_container {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    overflow-x: hidden;
+    padding: 0.2vw;
+    box-sizing: border-box;
+}
+
+.chat_content {
+    background-color: transparent;
+    width: 80%;
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1vw;
+}
+
+.conversertion_sec {
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+    padding: 0.4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+/* Gerais */
+
+.msg_container {
+    background-color: transparent;
+    padding: 0.4vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.userMSG_container {
+    align-items: flex-end;
+}
+
+.ianesMSG_container {
+    align-items: flex-start;
+}
+
+
+/* Fica em Absolute, fora da caixa */
+
+.container_pic {
+    background-color: transparent;
+    padding: 0.7vw;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+
+.container_pic_user {
+    top: 0%;
+    right: 0%;
+    transform: translateX(100%) translateY(0%);
+}
+
+.container_pic_ianes {
+    top: 0%;
+    left: 0%;
+    transform: translateX(-100%) translateY(0%);
+}
+
+/* Fica em Relative, fora da caixa */
+
+.container_text {
+    width: 60%;
+    height: auto;
+    padding: 1vw;
+    padding-left: 1.4vw;
+    padding-right: 1.4vw;
+    border: none;
+    margin-top: 0%;
+    border-radius: 0vw 0vw 0vw 0vw;
+    background-color: transparent;
+}
+
+.userMSG_div {
+    border-radius: 0.5vw 0vw 0.5vw 0.5vw;
+    background-color: var(--color-cinza_chat_bg_light);
+}
+
+.ianesMSG_div {
+    border-radius: 0vw 0.5vw 0.5vw 0.5vw;
+    background-color: transparent;
+}
+
+.content_text {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+.userMSG_p {
+    text-align: right;
+}
+
+.ianesMSG_p {
+    text-align: left;
+}
+
+#user_svg_chat {
+    width: 2.5vw;
+    height: auto;
+    object-fit: contain;
+}
+
+#user_svg_chat path {
+    fill: #000000;
+}
+
+#ianes_img_chat {
+    width: 2.5vw;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Opções extras do IAnes Botões */
+
+.extraOptions_IAnes {
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    padding: 0.2vw;
+}
+
+.extraOptions_IAnes_Itens {
+    background-color: transparent;
+    padding: 0.3vw;
+    margin: 0;
+    border: none;
+    border-radius: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.extraOptions_IAnes_Itens ion-icon {
+    font-size: 1.2vw;
+    color: #000000;
+}
+
+.extraOptions_IAnes_Itens:hover {
+    background-color: var(--color-cinza_hover_bg_light);
+}
+
+.tp_extraO_IA {
+    display: none; /* Inicialmente escondido */
+    position: absolute;
+    background-color: var(--color-azul-medio);
+    color: #ffffff;
+    font-size: 1vw;
+    padding: 0.3vw;
+    border-radius: 0.2vw;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 50;
+    transition: opacity 0.3s ease, transform 0.3s ease, display 0.3s ease;
+}
+
+#popup_copyText {
+    display: none; 
+    position: fixed; 
+    top: 10%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: var(--color-verde-sucesso); 
+    border: none; 
+    border-radius: 0.4vw; 
+    padding: 1vw; 
+    box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.2); 
+    z-index: 500;
+}
+
+#popup_copyText p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0vw;
+}
+
+#loading {
+    background-color: transparent;
+    border: none;
+    height: 5px;
+    margin-top: 10px;
+    overflow: hidden;/
+}
+
+#loading_bar {
+    background: #ffffff; 
+    height: 100%; 
+    width: 0%;
+    transition: width 0.5s;
+}
+
+
+/* Container da Area de Texto */
+
+.bottom_content {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0vw;
+    box-sizing: border-box;
+}
+
+.input_container {
+    background-color: red;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.input_container form {
+    background-color: green;
+    width: 90%;
+    height: 8vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: solid 0.2vw var(--color-vermelho-medio);
+    border-radius: 0.6vw;
+    padding: 0.2vw;
+}
+
+.message_area {
+    background-color: purple;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+.message_area textarea {
+    background-color: #ffffff;
+    width: 100%;
+    height: auto;
+    resize: none;
+    outline: none;
+}
+
+.button_area {
+    background-color: peru;
+    width: 10%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row;
+}
+
+
+.aviso_container {
+    background-color: transparent;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.aviso_container p {
+    margin: 0;
+    padding: 0;
+    font-size: 1vw;
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: pretty;
+}
+
+/* 
+.input_container {
+    padding: 0.6vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    border: 0.15vw var(--color-cinza) solid;
+    border-radius: 1vw;
+    width: 50%;
+    max-width: 90%;
+    height: auto;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    margin-bottom: 2vw;
+}
+
+.input_container.focused {
+    border: 0.15vw var(--color-vermelho-medio) solid;
+}
+
+.message_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background-color: transparent;
+    width: 94%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.message_div {
+    display: flex;
+    flex-direction: column;
+}
+
+.message_div textarea {
+    width: 100%;
+    min-height: 1vw;
+    max-height: 10vw;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    line-height: 1;
+    resize: none;
+    padding: 0.4vw;
+    border: none;
+    outline: none;
+    font-size: 1vw;
+    font-family: var(--font-montserrat);
+    background-color: transparent;
+}
+
+.message_div textarea:focus {
+    border: none;
+    outline: none; 
+}
+
+.button_div {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row;
+    background-color: transparent;
+    width: 6%;
+    height: 100%;
+    position: relative;
+}
+
+.btn_enviar {
+    padding: 1vw;
+    border-radius: 0.6vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
+    overflow: hidden; 
+    transition: 0.3s;
+    --- Por Padrão está "desativado"
+    background-color: var(--color-cinza);
+    border: 0vw var(--color-cinza) solid;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.btn_enviar ion-icon {
+    color: #FFFFFF;
+    font-size: 1.2vw;
+    margin: 0;
+    position: absolute;
+    transition: transform 0.3s;
+}
+
+#icon_aviao {
+    display: block;
+}
+
+#icon_quadrado {
+    display: none;
+}
+
+.btn_enviar:hover #icon_aviao {
+    font-weight: bold;
+    animation: aviao_animado 1s ease-in-out 1 forwards; 
+}
+
+.btn_enviar:hover {
+    background-color: var(--color-azul-medio);
+}
+ 
+ Posição inicial
+ Move para o canto superior direito
+ Move 10vw para baixo
+ Move para a esquerda
+ Retorna ao ponto inicial
+
+@keyframes aviao_animado {
+    0% {
+        transform: translate(0, 0); 
+    }
+    20% {
+        transform: translate(3vw, -3vw); 
+        opacity: 1; /* Visível 
+    }
+    40% {
+        transform: translate(3vw, 3vw);
+        opacity: 1; /* Continua visível
+    }
+    70% {
+        transform: translate(-3vw, 3vw); 
+        opacity: 1; /* Continua visível 
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+*/
+
+/* --------------- Container de Resposta */
+
+
+
+#scrollButton {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: flex;
+    left: 50%;
+    bottom: 7vw;
+    display: none;
+    background-color: transparent;
+    border: none;
+    border-radius: 0%;
+    cursor: pointer;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+
+#scrollButton ion-icon {
+    font-size: 2vw;
+    font-weight: bold;
+    color: #000000;
+}
+
+#msgteste {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    border: none;
+    border-radius: 50%;
+    padding: 1vw;
+    margin-bottom: 1vw;
+    margin-right: 1vw;
+    cursor: pointer;
+    pointer-events: all;
+}
