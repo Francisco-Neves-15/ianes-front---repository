@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset='utf-8'>
+    <!-- Forçar o navegador renderizar com o modo mais recente do navegador atual (instalado na máquina do usuário). -->
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <!-- Define a: Controle do Chache, nesse caso "private" então o cache é armazenado para um usuário específico -->
+    <meta http-equiv="cache-control" content="private" />
+    <!-- Define a: Linguagens do Conteudo -->
+    <meta http-equiv="content-language" content="pt-br, pt, en-US, fr" />
+    <title>IAnes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- Import do CSS Principal com Aplicações Gerais -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/main.css'>
+
+    <!-- Import do CSS Cabeçalho -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/--header.css'>
+    <!-- Import do CSS Rodapé -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/--footer.css'>
+
+    <!-- Import do CSS da pagina da IA -->
+    <link rel='stylesheet' type='text/css' media='screen' href='_css/__chatIAnes.css'>
+
+    <!-- Biblioteca jsPDF, para baixar em pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body id="corpoPagina_chatIanes">
+
+    <!-- Cabeçalho -->
+    <header id="header"></header>
+
+    <main id="mainElement_chatIAnes">
+
+        <div id="rooms_container" class="rooms_container trans_03s-margin-left rooms_container-close">
+            <div class="sideBar_header">
+                <button class="btn_sideBar_header btn_home" onclick="navigateTo('index_page', 'normal')" onmouseover="showTooltip_sideBar('irInicio')" onmouseout="hideTooltip_sideBar('irInicio')">
+                    <i id="icone_sideBar_home" class='bx bxs-home icone_sideBar'></i>
+                    <p class="tp_sideBar_header tp_btn_home" id="tp_irInicio">Ir para o Início</p>
+                </button>
+                <button class="btn_sideBar_header btn_novaSala" onclick="criarNovaSala()" onmouseover="showTooltip_sideBar('criarNovaSala')" onmouseout="hideTooltip_sideBar('criarNovaSala')">
+                    <i id="icone_sideBar_home" class='bx bxs-message-add icone_sideBar'></i>
+                    <p class="tp_sideBar_header tp_btn_criarSalas" id="tp_criarNovaSala">Criar nova Sala</p>
+                </button>
+                <button onclick="expandSidebar()" aria-expanded="true" class="btn_sideBar_header btn_expandirSalas btn_expandirSalas-open" id="btn_expandirSalas" onmouseover="showTooltip_sideBar('expand')" onmouseout="hideTooltip_sideBar('expand')">
+                    <!-- <ion-icon id="icone_expandSidebar" class="icone_expandSidebar rotate90neg" name="push-outline"></ion-icon> -->
+                    <i id="icone_expandSidebar" class='bx bx-menu-alt-left icone_expandSidebar rotate_flip'></i>
+                    <p class="tp_expandSidebar tp_expandSidebar-open" id="tp_texto_abrirSidebar">Abrir painel lateral</p>
+                    <p class="tp_expandSidebar tp_expandSidebar-close tp_expandSidebar-hide" id="tp_texto_fecharSidebar">Fechar painel lateral</p>
+                </button>
+            </div>
+            <div class="rooms_content">
+                <h1 id="texto_chatIA_salasConversas">Salas de Conversas</h1>
+                <div class="rooms_section">
+                    <!-- Container dos Botões das Salas -->
+                    <div class="container_btn_trocarSalas">
+                        <div onclick="trocarSalas(this)" class="btn_trocarSalas" id="btn_trocarSalas_sala-1">
+                            <form method="get" id="form_rename" class="roomsNames">
+                                <p class="roomName" id="texto_chatIA_roomName">Sala 1</p>
+                                <input class="rename_area" placeholder="Nova Sala" id="input_rename" maxlength="30" value="Nova Sala" type="text">
+                            </form>
+                        </div>
+                        <div class="btn_roomsEP" id="btn_roomsEP-1" onclick="activeExtraOptionsBox(this)" aria-expanded="false"  onmouseover="showTooltip_sideBar('opcoes')" onmouseout="hideTooltip_sideBar('opcoes')">
+                            <i class='bx bx-dots-horizontal-rounded'></i>
+                            <p class="tp_sideBar_header tp_opcoes" id="tp_opcoes">Opções</p>
+                        </div>
+                        <div class="roomsExtraOptions_box" id="roomsExtraOptions_box">
+                            <div class="roomsExtraOptions_item" id="sideBar_download">
+                                <i class='bx bxs-file-pdf download-icon'></i>
+                                <p id="texto_chatIA_renomar" class="download-text">Download</p>
+                            </div>
+                            <div class="roomsExtraOptions_item" id="sideBar_rename" onclick="renameRoom(this)">
+                                <i class='bx bxs-pencil pencil-icon'></i>
+                                <p id="texto_chatIA_renomar" class="pencil-text">Renomear</p>
+                            </div>
+                            <div class="roomsExtraOptions_item" id="sideBar_excluir">
+                                <i class='bx bxs-trash trash-icon'></i>
+                                <p id="texto_chatIA_renomar" class="trash-text">Excluir</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat_container" class="chat_container trans_03s-width chat_container-full">
+
+            <div class="chats_section" id="chats_section">
+
+                <!-- As salas serão adicionadas automaticamente de acordo com o usuario -->
+                <!-- Por padrão, a sala 1 é sempre está disponivel -->
+
+                <div class="chat_messages" id="chat_messages-chat-1">
+                    <ul class="messages_list" id="messages_list">
+                        <!-- Mensagem Inicial do Bot -->
+                        <li class="message bot">
+                            <img id="ianes_pic" src="" alt="IAnes Pic">
+                            <p id="texto_chatIA_botInicialMsg">1 - Olá! Eu sou o IAnes, estou aqui para lhe ajudar. Vamos iniciar a consulta?</p>
+                        </li>
+                        <!-- Resto das Mensagens -->
+                        <!-- Mesangem do Usuario -->
+                        <!-- <li class="message user">
+                            <p>Mensagem LEGAL DO USUARIO</p>
+                        </li> -->
+                        <!-- Mesangem do IAnes -->
+                        <!-- <li class="message bot">
+                            <img id="ianes_pic" src="" alt="IAnes Pic">
+                            <p id="ianes_msg">Mensagem LEGAL DO BOT</p>
+                            <div class="extraOptions_IAnes">
+                                <div class="extraOptions_IAnes_Itens" 
+                                     onclick="copyText_chatIA(this)" 
+                                     onmouseover="showTooltip_chat(this)" 
+                                     onmouseout="hideTooltip_chat(this)">
+                                    <ion-icon name="copy-outline"></ion-icon>
+                                    <p class="tp_extraO_IA">Copiar</p>
+                                </div>
+                            </div>
+                        </li> -->
+                    </ul>
+    
+                </div>
+
+                <div class="chat_messages" id="chat_messages-chat-2">
+                    <ul class="messages_list" id="messages_list">
+                        <!-- Mensagem Inicial do Bot -->
+                        <li class="message bot">
+                            <img id="ianes_pic" src="" alt="IAnes Pic">
+                            <p id="texto_chatIA_botInicialMsg">2 - Olá! Eu sou o IAnes, estou aqui para lhe ajudar. Vamos iniciar a consulta?</p>
+                        </li>
+                        <!-- Resto das Mensagens -->
+                        <!-- Mesangem do Usuario -->
+                        <!-- <li class="message user">
+                            <p>Mensagem LEGAL DO USUARIO</p>
+                        </li> -->
+                        <!-- Mesangem do IAnes -->
+                        <!-- <li class="message bot">
+                            <img id="ianes_pic" src="" alt="IAnes Pic">
+                            <p id="ianes_sala-1_msg-1">Mensagem LEGAL DO BOT</p>
+                            <div class="extraOptions_IAnes">
+                                <div class="extraOptions_IAnes_Itens" onclick="copyText_chatIA('1')" onmouseover="showTooltip_chat('copy', '1')" onmouseout="hideTooltip_chat('copy', '1')">
+                                    <ion-icon name="copy-outline"></ion-icon>
+                                    <p class="tp_extraO_IA" id="tp_ia-1-copy">Copiar</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul> -->
+    
+                </div>
+
+            </div>
+
+
+            
+            <form action="" method="get" id="inputTo_ianes_form" class="chat_input_form">
+                <textarea maxlength="10000" rows="1" id="user_input" placeholder="Digite uma mensagem..."></textarea>
+                <button type="submit" id="inputTo_ianes_enviar" class="inputTo_ianes_enviar btn_ativado" onclick="enviarMensagem('normal')">
+                    <ion-icon id="icon_aviao" name="paper-plane-outline"></ion-icon>
+                    <ion-icon id="icon_quadrado" name="square"></ion-icon>
+                </button>
+                <!-- Contador de Caracteres -->
+                <p class="ianesInput_contadorCaracteres" id="ianesInput_contadorCaracteres">0</p>
+                <!-- Botão para Rolar para Baixo -->
+                <div id="btn_rolarConvesa" class="btn_rolarConvesa" onclick="rolarConversa()">
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+                </div>
+            </form>
+            
+            <div onclick="baixarConversaComoPDF()" class="btn_baixarPDF">
+                <p id="texto_chatIA_baixarPDF">Baixar a conversa em PDF</p>
+                <i class='bx bxs-file-pdf '></i>
+            </div>
+        </div>
+    </main>
+    
+
+
+    <!-- Popup de confirmação de cópia -->
+    <div class="confirms_popups" id="popup_copyText">
+        <p id="texto_chatIA_copySucess">Texto copiado com sucesso</p>
+        <div id="loading">
+            <div id="loading_bar"></div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <!-- <footer id="footer"></footer> -->
+    
+    <!-- A Ordem de Chamar os <script> IMPORTA! -->
+    <!-- Chamando o Idioma e o Tema -->
+    <script src="_js/+idioma.js"></script>
+    <script src="_js/+tema.js"></script>
+    <!-- Chamando apenas do Cabeçalho -->
+    <script src="_js/--header.js"></script>
+    <!-- Chamando apenas do Rodapé -->
+    <script src="_js/--footer.js"></script>
+    <!-- Chamando o Principal DESSA pagina -->
+    <script src="_js/__chatIAnes.js"></script>
+    <!-- Chamando o Principal GERAL pagina -->
+    <script src="_js/main.js"></script>
+
+</body>
+</html>

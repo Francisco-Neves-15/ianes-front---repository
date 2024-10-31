@@ -1,0 +1,8 @@
+venv
+.venv
+*__pycache__
+*pyc
+# pip freeze > req.txt
+# python -m venv .venv
+# .venv/Scripts/activate
+# pip install -r req.txt

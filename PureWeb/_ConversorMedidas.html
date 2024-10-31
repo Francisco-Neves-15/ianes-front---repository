@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades CSS</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            box-sizing: border-box;
+            gap: 10vw;
+        }
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-family: cursive;
+            font-size: 4vw;
+            font-weight: bold;
+            color: green;
+            text-shadow: 0.2vw 0.2vw 0.2vw #000000;
+        }
+        .container {
+            padding: 1vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1vw;
+            width: 100%;
+        }
+        .container div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 2vw;
+        }
+        input, output {
+            width: 20%;
+            margin: 0;
+            padding: 0.6vw;
+            padding-right: 1vw;
+            padding-left: 1vw;
+            font-family: cursive;
+            font-size: 1.5vw;
+            border: 0.2vw solid green;
+            border-radius: 0.6vw;
+            box-shadow: 0.2vw 0.2vw 0.2vw #000000;
+        }
+        select {
+            width: 20%;
+            margin: 0;
+            padding: 0.6vw;
+            padding-right: 1vw;
+            padding-left: 1vw;
+            font-family: cursive;
+            font-size: 1.5vw;
+            border: 0.2vw solid green;
+            border-radius: 0.6vw;
+            box-shadow: 0.2vw 0.2vw 0.2vw #000000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversor de Unidades CSS</h1>
+    
+    <div class="container">
+        <div>
+            <input type="number" id="inputValue" placeholder="Valor">
+            <select id="inputUnit">
+                <option value="">Escolha uma Unidade</option>
+                <option value="vw">vw</option>
+                <option value="vh">vh</option>
+                <option value="px">px</option>
+                <option value="rem">rem</option>
+                <option value="em">em</option>
+                <option value="ch">ch</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+            </select>
+        </div>
+
+        <div>
+            <output id="outputValue">0</output>
+            <select id="outputUnit">
+                <option value="">Escolha uma Unidade</option>
+                <option value="vw">vw</option>
+                <option value="vh">vh</option>
+                <option value="px">px</option>
+                <option value="rem">rem</option>
+                <option value="em">em</option>
+                <option value="ch">ch</option>
+                <option value="cm">cm</option>
+                <option value="mm">mm</option>
+                <option value="in">in</option>
+                <option value="pt">pt</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        const inputValue = document.getElementById('inputValue');
+        const inputUnit = document.getElementById('inputUnit');
+        const outputValue = document.getElementById('outputValue');
+        const outputUnit = document.getElementById('outputUnit');
+
+        function convert(value, fromUnit, toUnit) {
+            // Converte o valor para pixels
+            let pixels;
+
+            switch (fromUnit) {
+                case 'vw':
+                    pixels = (value / 100) * window.innerWidth;
+                    break;
+                case 'vh':
+                    pixels = (value / 100) * window.innerHeight;
+                    break;
+                case 'px':
+                    pixels = value;
+                    break;
+                case 'rem':
+                    pixels = value * parseFloat(getComputedStyle(document.documentElement).fontSize);
+                    break;
+                case 'em':
+                    pixels = value * parseFloat(getComputedStyle(inputValue).fontSize);
+                    break;
+                case 'ch':
+                    pixels = value * parseFloat(getComputedStyle(document.documentElement).fontSize) * 0.5; // Aproximação
+                    break;
+                case 'cm':
+                    pixels = value * 37.795; // 1 cm = 37.795 px
+                    break;
+                case 'mm':
+                    pixels = value * 3.7795; // 1 mm = 3.7795 px
+                    break;
+                case 'in':
+                    pixels = value * 96; // 1 in = 96 px (aproximadamente)
+                    break;
+                case 'pt':
+                    pixels = value * 1.333; // 1 pt = 1.333 px (aproximadamente)
+                    break;
+                default:
+                    pixels = 0;
+            }
+
+            // Converte pixels para a unidade desejada
+            let result;
+
+            switch (toUnit) {
+                case 'vw':
+                    result = (pixels / window.innerWidth) * 100;
+                    break;
+                case 'vh':
+                    result = (pixels / window.innerHeight) * 100;
+                    break;
+                case 'px':
+                    result = pixels;
+                    break;
+                case 'rem':
+                    result = pixels / parseFloat(getComputedStyle(document.documentElement).fontSize);
+                    break;
+                case 'em':
+                    result = pixels / parseFloat(getComputedStyle(inputValue).fontSize);
+                    break;
+                case 'ch':
+                    result = pixels / (parseFloat(getComputedStyle(document.documentElement).fontSize) * 0.5); // Aproximação
+                    break;
+                case 'cm':
+                    result = pixels / 37.795; // Converte de px para cm
+                    break;
+                case 'mm':
+                    result = pixels / 3.7795; // Converte de px para mm
+                    break;
+                case 'in':
+                    result = pixels / 96; // Converte de px para in
+                    break;
+                case 'pt':
+                    result = pixels / 1.333; // Converte de px para pt
+                    break;
+                default:
+                    result = 0;
+            }
+
+            return result;
+        }
+
+        function updateOutput() {
+            const value = parseFloat(inputValue.value);
+            const fromUnit = inputUnit.value;
+            const toUnit = outputUnit.value;
+
+            if (!isNaN(value) && fromUnit && toUnit) {
+                const convertedValue = convert(value, fromUnit, toUnit);
+                outputValue.innerText = convertedValue.toFixed(2); // Exibe com duas casas decimais
+            } else {
+                outputValue.innerText = '---'; // Reseta a saída se o valor não for válido
+            }
+        }
+
+        // Atualiza a saída ao digitar ou ao mudar as unidades
+        inputValue.addEventListener('input', updateOutput);
+        inputUnit.addEventListener('change', updateOutput);
+        outputUnit.addEventListener('change', updateOutput);
+    </script>
+</body>
+</html>

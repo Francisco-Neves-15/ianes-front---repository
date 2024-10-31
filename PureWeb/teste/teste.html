@@ -1,0 +1,19 @@
+<button onclick="setLanguage('en')">English</button>
+<button onclick="setLanguage('pt')">Português</button>
+
+<p id="greeting"></p>
+
+<script>
+  const messages = {
+    en: "Hello, world!",
+    pt: "Olá, mundo!"
+  };
+
+  function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById("greeting").textContent = messages[lang];
+  }
+
+  // Set the default language
+  setLanguage('en');
+</script>
